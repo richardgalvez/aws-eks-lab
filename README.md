@@ -7,12 +7,22 @@
 - Running Kubernetes version 1.32 (current for EKS as of 2/8/2025)
 - Two private and public subnets within two availability zones using NAT Gateway
 
-After provisioned, update kubeconfig to interact with cluster via `kubectl`:
+### To-Do
+
+- Implement a NAT Instance rather than a NAT Gateway
+
+## Notes
+
+After EKS cluster and nodes are provisioned, use `aws eks update-kubeconfig` to interact with cluster via `kubectl`:
 
 ```bash
 aws eks update-kubeconfig --region us-east-1 --name staging-kube
 ```
 
-### To-Do
+To check the maximum amount of pods running for a given instance with optional capabilties:
 
-- Implement a NAT Instance rather than a NAT Gateway
+```bash
+./max-pods-calculator.sh --instance-type t3.small --cni-version 1.19.2-eksbuild.1
+```
+
+Given t3.small, for example, the max number of pods to run in a single instance is 11.
