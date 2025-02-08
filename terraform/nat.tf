@@ -1,3 +1,5 @@
+# TODO: Implement a NAT Instance rather than a NAT Gateway
+
 resource "aws_eip" "nat" {
   domain = "vpc"
 
@@ -14,5 +16,5 @@ resource "aws_nat_gateway" "nat" {
     Name = "${local.env}-net"
   }
 
-  depends_on    = [aws_internet_gateway.igw]    # Wait until IGW is created/provisioned
+  depends_on    = [aws_internet_gateway.igw]    # Wait until the IGW is created/provisioned
 }
