@@ -13,7 +13,7 @@
 
 ## Notes
 
-After EKS cluster and nodes are provisioned, use `aws eks update-kubeconfig` to interact with cluster via `kubectl`:
+After EKS cluster and nodes are provisioned, clear your current `~/.kube/config` file (if needed) then use `aws eks update-kubeconfig` to interact with cluster via `kubectl`:
 
 ```bash
 aws eks update-kubeconfig --region us-east-1 --name staging-kube
