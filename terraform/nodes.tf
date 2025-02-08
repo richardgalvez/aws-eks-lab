@@ -9,8 +9,8 @@ resource "aws_eks_node_group" "global" {
     aws_subnet.private_zone2.id
   ]
 
-  capacity_type   = "ON_DEMAND"
-  instance_types  = ["t3.micro"]
+  capacity_type   = "SPOT"
+  instance_types  = ["t3.small"]
 
   scaling_config {
     desired_size  = 1
