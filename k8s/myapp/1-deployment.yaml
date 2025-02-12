@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  namespace: myapp-ns
+spec:
+  selector:
+    matchLabels:
+      app: myapp
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+        - name: myapp
+          image: aputra/myapp-195:v2      # Example app
+          ports:
+            - name: http
+              containerPort: 8080
+          resources:      # Resource blocks are required for deployments with Horizontal Pod Autoscaler (HPA) on EKS, not limits, to calculate usage in %
+            requests:
+              memory: 256Mi
+              cpu: 100m
+            limits:
+              memory: 256Mi
+              cpu: 100m
