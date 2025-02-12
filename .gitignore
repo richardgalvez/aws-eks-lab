@@ -1,8 +1,5 @@
 .DS_Store
 
-# YouTube Tutorial Location File
-video.txt
-
 # Environment file
 .env
 
@@ -115,3 +112,6 @@ terraform.rc
 
 # Ignore Terraform lock file
 .terraform.lock.hcl
+
+# Link
+link.txt

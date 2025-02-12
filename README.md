@@ -26,3 +26,9 @@ To check the maximum amount of pods running for a given instance with optional c
 ```
 
 Given t3.small, for example, the max number of pods to run in a single instance is 11.
+
+Get the latest versions of EKS Add-ons by using:
+
+```bash
+aws eks describe-addon-versions --region us-east-1 --addon-name eks-pod-identity-agent
+```
