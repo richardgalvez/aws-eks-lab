@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mas-myapp
+  namespace: mas-ns
+  # Supported Service Annotations: https://kubernetes-sigs.github.io/aws-load-balancer-controller/v2.11/guide/service/annotations/
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: external           # This needs to be specified, otherwise the legacy cloud manager controller will be used
+    service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip      # IP mode is preferred, as it doesn't route requests through nodePorts like Instance mode
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    # service.beta.kubernetes.io/aws-load-balancer-proxy-protocol: "*"    # This can be used if the app needs to know the actual client source IP
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8080
+      targetPort: http
+  selector:
+    app: mas-myapp
