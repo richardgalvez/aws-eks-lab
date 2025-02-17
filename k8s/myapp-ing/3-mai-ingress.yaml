@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ing
+  namespace: mai-ns
+  annotations:
+    # alb.ingress.kubernetes.io/certificate-arn: {cert arn}     # For Application Load Balancer (ALB), need a public cert and LetsEncrypt cannot be used
+    # alb.ingress.kubernetes.io/listen ports: '[{"HTTP": 80}, {"HTTPS": 443}]'      # TLS from AWS Certificate Manager is required with domain name
+    # alb.ingress.kubernetes.io/ssl-redirect: "443"     # Common redirect
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+spec:
+  ingressClassName: alb     # Creates an ALB in AWS
+  rules:      # Ingress does not have a TLS section, as TLS will be terminated outside the Kubernetes cluster on the ALB, unlike nginx Ingress controller
+    - host: mns.rgkube.com      # This can be used to test the application before changing the DNS record and sending live traffic to it
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp-ing
+                port:
+                  number: 8080
