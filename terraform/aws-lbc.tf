@@ -47,7 +47,7 @@ resource "helm_release" "aws_lbc" {
 
   set {
     name  = "clusterName"
-    value = "aws_eks_cluster.eks.name"
+    value = aws_eks_cluster.eks.name
   }
 
   set {
@@ -57,7 +57,7 @@ resource "helm_release" "aws_lbc" {
 
   set {
     name  = "vpcId"
-    value = "aws_vpc.main.id"
+    value = aws_vpc.main.id
   }
 
   depends_on = [helm_release.cluster_autoscaler]
