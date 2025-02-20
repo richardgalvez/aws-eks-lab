@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ing
+  namespace: mai-ns
+  annotations:      # This is HTTPS Ingress (Secured Ingress with TLS)
+    alb.ingress.kubernetes.io/certificate-arn: ${MAI_CERT_ARN}
+    alb.ingress.kubernetes.io/listen ports: '[{"HTTP":80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/healthcheck-path: /health
+spec:
+  ingressClassName: alb     
+  rules:     
+    - host: ${MAI_HOST}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp-ing
+                port:
+                  number: 8080

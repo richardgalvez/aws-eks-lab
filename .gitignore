@@ -115,3 +115,6 @@ terraform.rc
 
 # Link
 link.txt
+
+# Ignore YAML files with parameterized values
+*-env.yaml
