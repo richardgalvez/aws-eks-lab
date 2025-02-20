@@ -1,0 +1,15 @@
+# Creates ClusterIssuer that can be used in all namespaces to obtain certs
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: http-01-prod
+spec:
+  acme:
+    email: null@sazm02k31z.com      # If cert-manager fails to renew a cert, email warning can be sent ahead of time
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: http-01-prod-cluster-issuer
+    solvers:
+      - http01:
+          ingress:
+            ingressClassName: external-nginx

@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myapp-ing
+  namespace: mai-ns-ngsec
+  annotations:
+    cert-manager.io/cluster-issuer: http-01-production
+spec:
+  ingressClassName: external-nginx
+  rules:
+    - host: ${MAI_INGSEC}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: myapp-ing
+                port:
+                  number: 8080
+  tls:
+    - hosts:
+      - ${MAI_INGSEC}
+      secretName: ${MAI_INGSEC_SECRET}

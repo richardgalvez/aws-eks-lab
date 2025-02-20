@@ -40,12 +40,12 @@ aws eks describe-addon-versions --region us-east-1 --addon-name eks-pod-identity
 
 * * *
 
-For YAML files with environment variables, `export` the variables in the terminal first then use `envsubst` to generate a new file that will contain the values. Add '-env' before .yaml to prevent it from being tracked/committed if sensitive information is involved.
+For YAML files with environment variables, `export` the variables in the current terminal first then use `envsubst` to generate a new file that will contain the values. Add '-env' before .yaml to prevent it from being tracked/committed if sensitive information is involved.
 
 ```bash
 export VALUE="value"
 
-envsubst < {FULL_FILEPATH}/file.yaml > file-env.yaml
+envsubst < {FILEPATH}/file.yaml > file-env.yaml
 ```
 
 From there, the file can be applied via `kubectl apply -f file-env.yaml`.
