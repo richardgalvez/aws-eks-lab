@@ -9,7 +9,7 @@
 
 ### To-Do
 
-- Fix AWS NLB not deleting properly - holding up deletion of node groups, subnets, and VPCs
+- Fix AWS NLB, security groups not deleting properly - holding up deletion of node groups, EKS cluster, subnets, and VPCs
 - Implement a NAT Instance rather than a NAT Gateway
 - Automate creation and usage of ACM (Certificate Manager) certs for apps where required
 
