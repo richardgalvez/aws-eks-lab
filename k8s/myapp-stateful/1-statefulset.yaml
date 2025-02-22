@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: myapp-st
+  namespace: mast-ns
+spec:
+  serviceName: nginx
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myapp-st
+  template:
+    metadata:
+      labels:
+        app: myapp-st
+    spec:
+      containers:
+        - name: myapp-st
+          image: aputra/myapp-195:v2
+          ports:
+            - name: http
+              containerPort: 8080
+          volumeMounts:
+            - name: data
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: data
+      spec:
+        accessModes: [ReadWriteOnce]
+        storageClassName: gp2
+        resources:
+          requests:
+            storage: 5Gi

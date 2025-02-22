@@ -25,10 +25,10 @@ aws eks update-kubeconfig --region us-east-1 --name staging-kube
 To check the maximum amount of pods running for a given instance with optional capabilties:
 
 ```bash
-./max-pods-calculator.sh --instance-type t3.medium --cni-version 1.19.2-eksbuild.1
+./max-pods-calculator.sh --instance-type t3a.large --cni-version 1.19.2-eksbuild.1
 ```
 
-In this case, with t3.medium, which is used in this lab, the max number of pods to run in a single instance is 17.
+In this case, with t3a.large, which is used in this lab, the max number of pods to run in a single instance is 35.
 
 * * *
 
